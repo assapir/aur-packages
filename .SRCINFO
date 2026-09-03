@@ -10,9 +10,8 @@ pkgbase = tar1090-git
 	depends = bash
 	depends = gzip
 	depends = jq
+	depends = dump1090
 	optdepends = wget: UAT/978 and planefinder data fetch (ENABLE_978, PF_ENABLE)
-	optdepends = readsb-git: ADS-B decoder (default SOURCE_DIR=/run/readsb)
-	optdepends = dump1090-fa-git: ADS-B decoder (set SOURCE_DIR=/run/dump1090)
 	optdepends = lighttpd: serve the web interface, snippet in /etc/lighttpd/conf.d/tar1090.conf
 	optdepends = nginx: serve the web interface, snippet in /usr/share/doc/tar1090/nginx-tar1090.conf
 	backup = etc/default/tar1090

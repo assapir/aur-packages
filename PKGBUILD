@@ -6,11 +6,9 @@ pkgdesc="Web interface for readsb / dump1090-fa with track history, heatmap, ran
 arch=('any')
 url="https://github.com/wiedehopf/tar1090"
 license=('GPL-2.0-or-later')
-depends=('bash' 'gzip' 'jq')
+depends=('bash' 'gzip' 'jq' 'dump1090')
 makedepends=('git')
 optdepends=('wget: UAT/978 and planefinder data fetch (ENABLE_978, PF_ENABLE)'
-            'readsb-git: ADS-B decoder (default SOURCE_DIR=/run/readsb)'
-            'dump1090-fa-git: ADS-B decoder (set SOURCE_DIR=/run/dump1090)'
             'lighttpd: serve the web interface, snippet in /etc/lighttpd/conf.d/tar1090.conf'
             'nginx: serve the web interface, snippet in /usr/share/doc/tar1090/nginx-tar1090.conf')
 backup=('etc/default/tar1090' 'etc/lighttpd/conf.d/tar1090.conf')
@@ -22,8 +20,8 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP')
 
-# defaults baked into the lighttpd/nginx snippets; the service reads SOURCE_DIR from /etc/default/tar1090
-_srcdir=/run/readsb
+# where dump1090 writes aircraft.json; baked into the web server snippets, the service reads it from /etc/default/tar1090
+_srcdir=/run/dump1090
 _share=/usr/share/tar1090
 
 pkgver() {
@@ -52,7 +50,7 @@ build() {
   sed "${subst[@]}" -e 's/INSTANCE/tar1090/g' tar1090/nginx.conf > nginx-tar1090.conf
   sed "${subst[@]}" -e 's?ExecStart=.* /run/tar1090 .*?ExecStart='"$_share"'/tar1090.sh /run/tar1090 ${SOURCE_DIR}?' \
       -e 's/^After=dump1090-fa.service/After=dump1090.service/' tar1090/tar1090.service > tar1090.service
-  { printf '# Directory where the decoder writes aircraft.json\n# readsb-git: /run/readsb   dump1090-fa-git: /run/dump1090\nSOURCE_DIR=%s\n\n' "$_srcdir"; cat tar1090/default; } > default
+  { printf '# Directory where dump1090 writes aircraft.json\nSOURCE_DIR=%s\n\n' "$_srcdir"; cat tar1090/default; } > default
 }
 
 package() {
