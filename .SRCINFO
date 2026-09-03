@@ -1,0 +1,27 @@
+pkgbase = tar1090-git
+	pkgdesc = Web interface for readsb / dump1090-fa with track history, heatmap, range outline and aircraft database
+	pkgver = 3.14.1818.r2373.g0895bdb
+	pkgrel = 1
+	url = https://github.com/wiedehopf/tar1090
+	install = tar1090.install
+	arch = any
+	license = GPL-2.0-or-later
+	makedepends = git
+	depends = bash
+	depends = gzip
+	depends = jq
+	optdepends = wget: UAT/978 and planefinder data fetch (ENABLE_978, PF_ENABLE)
+	optdepends = readsb-git: ADS-B decoder (default SOURCE_DIR=/run/readsb)
+	optdepends = dump1090-fa-git: ADS-B decoder (set SOURCE_DIR=/run/dump1090)
+	optdepends = lighttpd: serve the web interface, snippet in /etc/lighttpd/conf.d/tar1090.conf
+	optdepends = nginx: serve the web interface, snippet in /usr/share/doc/tar1090/nginx-tar1090.conf
+	backup = etc/default/tar1090
+	backup = etc/lighttpd/conf.d/tar1090.conf
+	source = tar1090::git+https://github.com/wiedehopf/tar1090.git
+	source = tar1090-db::git+https://github.com/wiedehopf/tar1090-db.git
+	source = tar1090.sysusers
+	sha256sums = SKIP
+	sha256sums = SKIP
+	sha256sums = SKIP
+
+pkgname = tar1090-git

@@ -1,0 +1,18 @@
+post_install() {
+    cat <<'MSG'
+tar1090 is a web page on top of an existing decoder; nothing runs until you:
+  1. Set SOURCE_DIR in /etc/default/tar1090 to where your decoder writes aircraft.json
+     (readsb-git: /run/readsb, dump1090-fa-git: /run/dump1090) and match it in the
+     web server snippet.
+  2. lighttpd: add to /etc/lighttpd/lighttpd.conf
+       server.modules += ("mod_alias", "mod_redirect", "mod_setenv")
+       include "conf.d/tar1090.conf"
+     nginx: include /usr/share/doc/tar1090/nginx-tar1090.conf in your server {} block.
+  3. systemctl enable --now tar1090   (track history; the map works without it)
+Web interface: http://<host>/tar1090/
+MSG
+}
+
+post_upgrade() {
+    systemctl try-restart tar1090.service 2>/dev/null || true
+}
