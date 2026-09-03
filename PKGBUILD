@@ -1,4 +1,4 @@
-# Maintainer: Assaf Sapir <meijin007@gmail.com>
+# Maintainer: Assaf Sapir <assaf AT sapir.io>
 pkgname=tar1090-git
 pkgver=3.14.1818.r2373.g0895bdb
 pkgrel=1
