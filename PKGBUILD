@@ -9,8 +9,8 @@ license=('GPL-2.0-or-later')
 depends=('bash' 'gzip' 'jq' 'dump1090')
 makedepends=('git')
 optdepends=('wget: UAT/978 and planefinder data fetch (ENABLE_978, PF_ENABLE)'
-            'lighttpd: serve the web interface, snippet in /etc/lighttpd/conf.d/tar1090.conf'
-            'nginx: serve the web interface, snippet in /usr/share/doc/tar1090/nginx-tar1090.conf')
+            'lighttpd: serve the web interface'
+            'nginx: serve the web interface')
 backup=('etc/default/tar1090' 'etc/lighttpd/conf.d/tar1090.conf')
 install=tar1090.install
 source=("tar1090::git+https://github.com/wiedehopf/tar1090.git"
