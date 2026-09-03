@@ -1,5 +1,4 @@
 pkg/
 src/
-tar1090/
-tar1090-db/
 *.pkg.tar*
+*-git/*/
